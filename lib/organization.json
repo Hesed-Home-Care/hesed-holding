@@ -44,8 +44,7 @@
           "url": "https://coloradocareassist.com/",
           "description": "A licensed Colorado home care agency. Personal and dementia care, live-in care, care for veterans, and end-of-life support across the Front Range, since 2012."
         }
-      ],
-      "sameAs": ["http://www.hesedfoundation.org/"]
+      ]
     },
     {
       "@type": "WebSite",
