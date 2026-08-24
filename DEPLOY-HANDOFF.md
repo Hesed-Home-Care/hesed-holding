@@ -4,7 +4,7 @@
 
 In `~/mac-mini-apps/hesed-holding/`, committed and pushed to `origin/main` as **`232b693`** (rebased on top of an existing remote commit `17a44ee`):
 
-- Created `lib/organization.json` — JSON-LD `@graph`: HoldingCompany/Organization (legalName, address 1911 11th St Fl 2 Boulder CO 80302, phone +1-303-757-1777, subOrganization for Pipestaff/LokiMode/Colorado CareAssist, sameAs Hesed Foundation) + WebSite
+- Created `lib/organization.json` — JSON-LD `@graph`: HoldingCompany/Organization (legalName, address 1911 11th St Fl 2 Boulder CO 80302, phone +1-303-757-1777, subOrganization for Pipestaff/LokiMode/Colorado CareAssist) + WebSite
 - Imported and rendered in `app/layout.tsx` `<head>` as a script tag
 - Fixed `twitter.title` to match `og.title` (was just `'Hesed'`)
 - `sitemap.xml`: added `lastmod` and `priority`
