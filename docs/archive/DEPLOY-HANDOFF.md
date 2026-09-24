@@ -1,3 +1,11 @@
+> ARCHIVED 2026-09-24: superseded by README.md (Deploy/Operate) and CLAUDE.md. Kept for history; not current.
+
+> Written 2026-08-24, when the Pages project had no git integration and pushes did not build. That is
+> no longer true: `deploy-listener` now runs `~/scripts/pages-deploy.sh … main out` on push, and a
+> direct-upload Pages project **cannot** be git-attached — so the "Connect to Git" section below must
+> not be attempted. Still true and folded into CLAUDE.md: the `foundingDate` warning, the static-export
+> constraints, and the API-key scope note.
+
 # Hesed holding page — deploy handoff
 
 ## What I did (this session)
