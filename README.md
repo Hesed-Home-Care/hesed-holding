@@ -54,7 +54,7 @@ public/* ──copied verbatim──► out/*
 | `lib/organization.json` | Schema.org `@graph`: `HoldingCompany`/`Organization` (+ `subOrganization` for the three holdings) and `WebSite`. |
 | `design-system/styles.css` | The token sheet (`:root` variables, 100–900 ramps, `.btn/.tag/.card/...`) — the look lives here. Guide: `design-system/readme.md`. |
 | `public/capital-flow.html` | Standalone canvas animation ("capital, deployed and held"), embedded by `PhotoBand` in an `<iframe src="/capital-flow.html">`. |
-| `public/_redirects` | Cloudflare Pages rules: legacy Pipestaff paths on this domain (`/for-agencies`, `/pricing`, `/blog/*`, …) 301 to `pipestaff.com`. Longest-prefix match — splats before any catch-all. |
+| `public/_redirects` | Cloudflare Pages rules: legacy Pipestaff paths on this domain (`/for-agencies`, `/pricing`, `/blog/*`, …) 301 to `pipestaff.com`. 11 exact rules + 4 `/prefix/*` splats, longest-prefix match, **no catch-all**. |
 | `public/robots.txt`, `public/sitemap.xml`, `public/llms.txt` | Crawler/AI surface. `llms.txt` restates the holdings in prose. |
 | `public/og-image.png`, `favicon.ico/svg`, `apple-touch-icon.png` | Social unfurl + icons. |
 
@@ -136,7 +136,7 @@ page and the machine-readable layer disagree:
 3. `public/llms.txt` → the Holdings list.
 
 **3. Retire a legacy Pipestaff URL** — add or edit a rule in `public/_redirects`; keep specific
-paths above any `/*` splat and the catch-all last.
+paths above any `/*` splat. There is no catch-all today; if you add one it goes last.
 
 **4. Change the look** — edit the tokens at the top of `design-system/styles.css`
 (`--color-*`, `--font-*`, `--space-*`, `--radius-*`, `--shadow-*`); every page reads them.
@@ -164,7 +164,8 @@ Don't hard-code a hex or px value a token already carries (see `design-system/re
   poll a directory listing and restart-loop the portal. Use `4173+`.
 - **Legal ground truth:** one entity, `Hesed Home Care LLC, d/b/a Colorado CareAssist`. Banned:
   `Asset Home Care`, `Colorado CareAssist Inc`, `Colorado CareAssist LLC`. The published phone
-  `(303) 757-1777` is answered by people; never substitute another line.
+  `(303) 757-1777` is answered by people; never substitute another line. The license `#04Y296` is
+  printed from `site-config.ts` and restated in `llms.txt`; it is not in the JSON-LD.
 - **This repo is not the `hesedhomecare` repo.** That one is Pipestaff (port 3001, pipestaff.com).
   Same domain family, different product.
 

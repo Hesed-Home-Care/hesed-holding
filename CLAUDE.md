@@ -19,8 +19,9 @@ Everything about what this site is, how it's built, how it deploys and how to op
 - **A holding change is three files:** `lib/site-config.ts`, `lib/organization.json`
   (`subOrganization`), `public/llms.txt`. Update all three in the same commit.
 - **Published claims are legal facts.** Entity is `Hesed Home Care LLC, d/b/a Colorado CareAssist`
-  (banned: `Asset Home Care`, `Colorado CareAssist Inc`, `Colorado CareAssist LLC`). Address, phone
-  `(303) 757-1777` and license `#04Y296` must match between `site-config.ts` and
+  (banned: `Asset Home Care`, `Colorado CareAssist Inc`, `Colorado CareAssist LLC`). Address and phone
+  `(303) 757-1777` must match between `lib/site-config.ts` and `lib/organization.json`. The license
+  `#04Y296` lives in `site-config.ts` `footer.licenseLine` and in `public/llms.txt` — it is **not** in
   `organization.json`. Never substitute another phone number.
 - **Jason's copy is Jason's.** This page is public brand voice, dictated and reviewed. Rewrite it
   only when asked; a grammar "fix" on live marketing copy is an unrequested edit.
@@ -32,9 +33,11 @@ Everything about what this site is, how it's built, how it deploys and how to op
   deploy-listener webhook running `~/scripts/pages-deploy.sh … main out` *is* the auto-deploy.
 - **`pages-deploy.sh` builds in the live checkout**, so a dirty/behind checkout ships the wrong tree
   (or fails). `git -C ~/mac-mini-apps/hesed-holding status --porcelain` before blaming the pipeline.
-- **`git archive HEAD` mode strips `README.md` and `DEPLOY-HANDOFF.md` from the upload** (a 7/16
-  near-miss published internal notes). With the `out` argument only build output ships — but never
-  park sensitive files inside `public/`, which is copied verbatim into `out/`.
+- **`git archive HEAD` mode strips every `*.md` file and the whole `docs/` directory from the
+  upload** (`find -name '*.md' -delete; rm -rf docs`) — a 7/16 near-miss published internal notes,
+  and a 9/24 repeat on lokimode.com led to that widening. This repo deploys with the `out` argument,
+  so only build output ships — but never park sensitive files inside `public/`, which is copied
+  verbatim into `out/`.
 - **Don't re-add `hesedfoundation.org` to the JSON-LD `sameAs`.** Removed 8/24 (commits #6, #8): the
   foundation is separate philanthropy, not an alias of the holding company. The on-page footnote
   link is the correct surface.
@@ -45,8 +48,8 @@ Everything about what this site is, how it's built, how it deploys and how to op
   `ssr: false`, and `images.unoptimized: true` is mandatory — otherwise the build dies.
   `trailingSlash: true` means canonical URLs end in `/`; keep `sitemap.xml`/`_redirects` consistent.
 - **Edit `public/*`, never `out/*`** — `out/` is generated and gitignored.
-- **`_redirects` is longest-prefix match.** Keep specific rules above their `/*` splats, and the
-  catch-all last. Legacy Pipestaff paths must 301 to `pipestaff.com`, not to this page.
+- **`_redirects` is longest-prefix match.** Keep specific rules above their `/*` splats. There is no
+  catch-all rule in the file today. Legacy Pipestaff paths must 301 to `pipestaff.com`, not to this page.
 - **Local preview ports:** never bind `8765, 8767, 8769, 8771, 3000, 3001, 3003, 3015, 3020, 3030,
   3099` — those route real traffic through the tunnel/health-monitor, and a `python -m http.server`
   on one of them caused a portal restart-loop incident. Use `4173+`; `next dev` defaults to the
@@ -57,11 +60,13 @@ Everything about what this site is, how it's built, how it deploys and how to op
 - **Node must be >= 24** (`.nvmrc`); `nvm use` before building. The Pages-equivalent build runs the
   same `npm run build`.
 - **Dead pointer:** the header comment in `lib/site-config.ts` cites a design spec at
-  `~/docs/superpowers/specs/2026-07-15-hesed-holding-site-design.md` — that file no longer exists
-  (checked 2026-09-24). Don't hunt for it or re-link it.
+  `/Users/shulmeister/docs/superpowers/specs/2026-07-15-hesed-holding-site-design.md` — that file
+  no longer exists (re-checked 2026-10-14). Don't hunt for it or re-link it.
 - **Nothing here is verified by tests.** `npm run typecheck` is the whole suite; "it compiled" is not
   evidence the page is right — check the live HTML after a deploy (`application/ld+json` count, the
   phrase you changed).
+- **`public/_redirects` has no catch-all.** It is Pipestaff legacy paths only — 11 exact rules plus
+  4 `/prefix/*` splats, and nothing after them. Don't assume a trailing `/*` exists to catch the rest.
 
 ## Definition of done for a change in this repo
 
