@@ -51,7 +51,7 @@ Everything about what this site is, how it's built, how it deploys and how to op
 - **`_redirects` is longest-prefix match.** Keep specific rules above their `/*` splats. There is no
   catch-all rule in the file today. Legacy Pipestaff paths must 301 to `pipestaff.com`, not to this page.
 - **Local preview ports:** never bind `8765, 8767, 8769, 8771, 3000, 3001, 3003, 3015, 3020, 3030,
-  3099` — those route real traffic through the tunnel/health-monitor, and a `python -m http.server`
+  3045, 3070, 3099` — those route real traffic through the tunnel/health-monitor, and a `python -m http.server`
   on one of them caused a portal restart-loop incident. Use `4173+`; `next dev` defaults to the
   taken port 3000, so pass `PORT=4174`.
 - **`:3001` is not this site.** The tunnel config still has inert `hesedhomecare.org → localhost:3001`
