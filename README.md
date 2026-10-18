@@ -30,7 +30,7 @@ From `package.json` and `next.config.mjs`:
 - **`output: 'export'`** — the build emits a static `out/` directory; nothing runs on a server.
   `images.unoptimized: true` (required: no Next image optimizer in a static export) and
   `trailingSlash: true` (every URL ends in `/`).
-- **No database, no API keys, no runtime dependencies beyond React.** Fonts load from the Google
+- **No database, no API keys, no runtime dependencies beyond Next.js and React (`next`, `react`, `react-dom`).** Fonts load from the Google
   Fonts CDN in `app/layout.tsx`: Archivo (latin), Heebo (the Hebrew `חֶסֶד`).
 - Deploy tooling: `npx wrangler@4.112.0 pages deploy` (invoked by `~/scripts/pages-deploy.sh`,
   not by this repo).
@@ -160,7 +160,7 @@ Don't hard-code a hex or px value a token already carries (see `design-system/re
 - **`public/*` is copied into `out/`** — edit `robots.txt`, `sitemap.xml`, `llms.txt`,
   `_redirects` in `public/`, never in `out/` (build output, regenerated).
 - **Never bind a local server to a production port** (`8765, 8767, 8769, 8771, 3000, 3001, 3003,
-  3015, 3020, 3030, 3099`) — a stray `python -m http.server` on one of them made the health-monitor
+  3015, 3020, 3030, 3045, 3070, 3099`) — a stray `python -m http.server` on one of them made the health-monitor
   poll a directory listing and restart-loop the portal. Use `4173+`.
 - **Legal ground truth:** one entity, `Hesed Home Care LLC, d/b/a Colorado CareAssist`. Banned:
   `Asset Home Care`, `Colorado CareAssist Inc`, `Colorado CareAssist LLC`. The published phone
